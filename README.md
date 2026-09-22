@@ -112,9 +112,9 @@ Located in `script.js` inside `startBlowDetection()`:
 - **Audio Stream**: Requests microphone access via `navigator.mediaDevices.getUserMedia({ audio: true })`.
 - **Frequency Analysis**: Connects the input stream to an `AnalyserNode` with `fftSize = 512`.
 - **Breath Sound Signature**:
-  - Exhaling into a microphone creates high-energy turbulent noise concentrated in lower frequency bins (approx 60 Hz – 400 Hz, bins 1 to 6).
-  - The script checks if `lowAvg > 100` and `totalAvg > 70`.
-  - When sustained across ~4 animation frames (~120–150ms), the flame is extinguished:
+  - Exhaling into a microphone creates turbulent noise concentrated in lower frequency bins (approx 60 Hz – 700 Hz, bins 1 to 8).
+  - The script checks if `lowAvg > 35` and `totalAvg > 14`.
+  - When sustained across 2 animation frames (~50–80ms), the flame is extinguished:
     - Stops audio tracks to release microphone hardware.
     - Adds `.out` class to the cake SVG.
     - Launches celebratory confetti and automatically transitions to `#s-ask`.
@@ -221,16 +221,16 @@ To calibrate candle blow sensitivity in [script.js](file:///d:/Projects/bday_spr
 
 ```javascript
 // Threshold for low frequencies (breath sound):
-if (lowAvg > 68 && totalAvg > 30) {
+if (lowAvg > 35 && totalAvg > 14) {
   rushCount++;
-  // Required sustained duration: 4 frames (~120ms)
-  if (rushCount >= 4) {
+  // Required sustained duration: 2 frames (~50-80ms)
+  if (rushCount >= 2) {
     extinguishCandle();
   }
 }
 ```
-- Decrease `lowAvg > 68` (e.g. to `55`) if you want the candle to blow out more easily.
-- Increase `rushCount >= 4` (e.g. to `6`) if ambient noise is triggering it accidentally.
+- Decrease `lowAvg > 35` (e.g. to `30`) if you want the candle to blow out with an even lighter breath.
+- Increase `rushCount >= 2` (e.g. to `4`) if ambient noise is triggering it accidentally.
 
 ---
 

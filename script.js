@@ -152,7 +152,7 @@ const CONFIG = {
       }
       const analyser = audioCtx.createAnalyser();
       analyser.fftSize = 512;
-      analyser.smoothingTimeConstant = 0.2;
+      analyser.smoothingTimeConstant = 0.15;
       const source = audioCtx.createMediaStreamSource(audioStream);
       source.connect(analyser);
 
@@ -165,7 +165,7 @@ const CONFIG = {
         micWrap.innerHTML = '<span class="mic-live"><span class="mic-dot"></span> Mic listening — blow into your mic! 🌬️</span>';
       }
 
-      function check() {
+      function checkAudio() {
         if (extinguished) {
           stopAudio();
           return;
@@ -173,12 +173,12 @@ const CONFIG = {
 
         analyser.getByteFrequencyData(dataArray);
 
-        // Wind / rushing breath noise has heavy low-frequency energy (approx 60-400Hz)
+        // Wind / rushing breath noise has low-frequency turbulence (approx 60-700Hz across bins 1-8)
         let lowEnergy = 0;
-        for (let i = 1; i <= 6; i++) {
+        for (let i = 1; i <= 8; i++) {
           lowEnergy += dataArray[i];
         }
-        let lowAvg = lowEnergy / 6;
+        let lowAvg = lowEnergy / 8;
 
         let totalEnergy = 0;
         for (let i = 0; i < bufferLength; i++) {
@@ -186,14 +186,18 @@ const CONFIG = {
         }
         let totalAvg = totalEnergy / bufferLength;
 
-        // Sound level reaches the level of rushing wind
-        if (lowAvg > 68 && totalAvg > 30) {
+        // Reduced threshold: activates promptly from a small blow of wind
+        if (lowAvg > 35 && totalAvg > 14) {
           rushCount++;
           cake.classList.add("flicker");
-          if (rushCount >= 4) { // Sustained for ~120-150ms
+          if (rushCount >= 2) { // Quick trigger on a small puff (~50-80ms)
             extinguishCandle();
             return;
           }
+        } else if (lowAvg > 24 && totalAvg > 9) {
+          // Faint wind flickers the flame
+          cake.classList.add("flicker");
+          rushCount = Math.max(0, rushCount - 1);
         } else {
           rushCount = Math.max(0, rushCount - 1);
           if (rushCount === 0) {
