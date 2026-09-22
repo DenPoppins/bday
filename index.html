@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Caveat:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- floating stickers -->
+<svg class="deco d1" viewBox="0 0 100 100" aria-hidden="true">
+  <circle cx="50" cy="50" r="40" fill="#2A3676"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#C9D0EC" stroke-width="1.2"/>
+  <path d="M10 50h80M50 10v80M22 22l56 56M78 22L22 78" stroke="#C9D0EC" stroke-width="1.2" opacity=".7"/>
+  <circle cx="38" cy="36" r="7" fill="#EEF0FB" opacity=".9"/>
+</svg>
+<svg class="deco d2" viewBox="0 0 100 100" aria-hidden="true">
+  <path d="M50 4l12 30 32 2-25 21 8 31-27-18-27 18 8-31L6 36l32-2z" fill="#2A3676"/>
+  <path d="M42 30l6 10-8 4z" fill="#8F99D4" opacity=".8"/>
+</svg>
+<svg class="deco d3" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0c4 30 16 46 50 50-34 4-46 20-50 50-4-30-16-46-50-50C34 46 46 30 50 0z" fill="#E8C35C"/></svg>
+<svg class="deco d4" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0c4 30 16 46 50 50-34 4-46 20-50 50-4-30-16-46-50-50C34 46 46 30 50 0z" fill="#2A3676"/></svg>
+
+<div class="stage">
+
+  <!-- 1. CAKE -->
+  <section class="screen on" id="s-cake">
+    <svg class="bunting" viewBox="0 0 600 70" aria-hidden="true">
+      <path d="M4 16C120 52 260 58 400 40 470 31 540 20 596 8" fill="none" stroke="#2A3676" stroke-width="2"/>
+      <g fill="none" stroke="#2A3676" stroke-width="2">
+        <path d="M40 26l20 2 -7 26z"/><path d="M96 34l20 3 -6 26z"/><path d="M152 41l20 2 -5 26z"/>
+        <path d="M208 46l20 1 -4 26z"/><path d="M264 48h20l-3 26z"/><path d="M320 47l20-1 -2 26z"/>
+        <path d="M376 43l20-3 -1 26z"/><path d="M432 36l19-4 1 26z"/><path d="M488 27l19-5 2 26z"/>
+      </g>
+    </svg>
+    <h1 class="script" style="font-size:clamp(2.8rem,13vw,5.4rem)">Happy Birthday</h1>
+    <p class="sub" id="cakeHint">make a wish &amp; blow out the candle 🕯️💨</p>
+    <div id="micPromptWrap" class="mic-hint">
+      <button class="btn ghost small-btn" id="micEnableBtn" type="button">🎤 enable mic to blow</button>
+    </div>
+    <button class="cake" id="cakeBtn" aria-label="Blow out the candle">
+      <svg viewBox="0 0 240 230">
+        <g class="flame">
+          <ellipse cx="120" cy="36" rx="9" ry="15" fill="#E8C35C"/>
+          <ellipse cx="120" cy="39" rx="4.5" ry="8" fill="#FFF3CF"/>
+        </g>
+        <g class="smoke" opacity=".6">
+          <path d="M120 44c-10-8 8-14 0-24" fill="none" stroke="#6A74AE" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <rect x="114" y="54" width="12" height="34" rx="4" fill="#FFFDF2" stroke="#2A3676" stroke-width="3"/>
+        <path d="M114 60h12M114 72h12" stroke="#2A3676" stroke-width="3"/>
+        <path d="M44 96h152v26H44z" fill="#FFFDF2" stroke="#2A3676" stroke-width="3"/>
+        <path d="M44 100c12 14 24 14 36 0s24-14 36 0 24 14 36 0 24-14 44 0" fill="none" stroke="#2A3676" stroke-width="3"/>
+        <rect x="30" y="122" width="180" height="46" rx="10" fill="#FFFDF2" stroke="#2A3676" stroke-width="3"/>
+        <rect x="16" y="166" width="208" height="46" rx="12" fill="#FFFDF2" stroke="#2A3676" stroke-width="3"/>
+        <g fill="#2A3676">
+          <circle cx="66" cy="144" r="4"/><circle cx="104" cy="150" r="4"/><circle cx="142" cy="142" r="4"/><circle cx="178" cy="150" r="4"/>
+          <circle cx="52" cy="190" r="4"/><circle cx="96" cy="184" r="4"/><circle cx="140" cy="192" r="4"/><circle cx="188" cy="186" r="4"/>
+        </g>
+      </svg>
+    </button>
+    <div class="row"><button class="btn" id="toAsk" hidden>next</button></div>
+  </section>
+
+  <!-- 2. ACCEPT THE GIFT -->
+  <section class="screen" id="s-ask">
+    <h2 class="title">Please accept the gift</h2>
+    <p class="sub">it took me a long time, okay</p>
+    <svg class="guy" viewBox="0 0 200 200" aria-hidden="true">
+      <ellipse cx="100" cy="176" rx="52" ry="8" fill="#2A3676" opacity=".15"/>
+      <path d="M100 42c34 0 58 26 58 58 0 40-26 62-58 62s-58-22-58-62c0-32 24-58 58-58z" fill="#FFFDF2" stroke="#2A3676" stroke-width="4"/>
+      <ellipse cx="78" cy="104" rx="15" ry="18" fill="#1B2352"/>
+      <ellipse cx="122" cy="104" rx="15" ry="18" fill="#1B2352"/>
+      <circle cx="73" cy="97" r="5.5" fill="#FFFDF2"/><circle cx="117" cy="97" r="5.5" fill="#FFFDF2"/>
+      <circle cx="82" cy="112" r="2.6" fill="#FFFDF2"/><circle cx="126" cy="112" r="2.6" fill="#FFFDF2"/>
+      <ellipse cx="56" cy="122" rx="10" ry="6" fill="#E9A9B8" opacity=".75"/>
+      <ellipse cx="144" cy="122" rx="10" ry="6" fill="#E9A9B8" opacity=".75"/>
+      <path d="M92 126c4 5 12 5 16 0" fill="none" stroke="#1B2352" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M44 120c-12 4-18 12-16 22M156 120c12 4 18 12 16 22" fill="none" stroke="#2A3676" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <div class="ask-wrap">
+      <div class="row">
+        <button class="btn" id="yesBtn">yes</button>
+        <button class="btn ghost" id="noBtn">no</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. WHY DID YOU CLICK NO -->
+  <section class="screen" id="s-no">
+    <h2 class="title">Why did you click no!</h2>
+    <svg class="guy" viewBox="0 0 200 200" aria-hidden="true">
+      <path d="M100 42c34 0 58 26 58 58 0 40-26 62-58 62s-58-22-58-62c0-32 24-58 58-58z" fill="#FFFDF2" stroke="#2A3676" stroke-width="4"/>
+      <ellipse cx="78" cy="102" rx="15" ry="18" fill="#1B2352"/>
+      <ellipse cx="122" cy="102" rx="15" ry="18" fill="#1B2352"/>
+      <circle cx="73" cy="95" r="5.5" fill="#FFFDF2"/><circle cx="117" cy="95" r="5.5" fill="#FFFDF2"/>
+      <path d="M78 120c-3 14-9 22-6 30 2 6 10 6 12 0 2-9-3-17-6-30z" fill="#8FB8E8"/>
+      <path d="M122 120c-3 14-9 22-6 30 2 6 10 6 12 0 2-9-3-17-6-30z" fill="#8FB8E8"/>
+      <path d="M90 134c4-5 16-5 20 0" fill="none" stroke="#1B2352" stroke-width="3.5" stroke-linecap="round"/>
+      <ellipse cx="56" cy="120" rx="10" ry="6" fill="#E9A9B8" opacity=".75"/>
+      <ellipse cx="144" cy="120" rx="10" ry="6" fill="#E9A9B8" opacity=".75"/>
+    </svg>
+    <p class="sub">unbelievable. try again.</p>
+    <div class="row"><button class="btn" data-go="s-ask">try again</button></div>
+  </section>
+
+  <!-- 4. BOUQUET -->
+  <section class="screen" id="s-bouquet">
+    <h2 class="title">first, some flowers</h2>
+    <p class="sub">for you</p>
+    <div class="bouquet-wrap">
+      <img src="lotus_bouquet.jpg" alt="A romantic bouquet of blooming lotus flowers">
+    </div>
+    <div class="row"><button class="btn" data-go="s-gifts">open your gifts</button></div>
+  </section>
+
+  <!-- 5. CHOOSE YOUR GIFTS -->
+  <section class="screen" id="s-gifts">
+    <h2 class="gift-heading">choose your gifts</h2>
+    <p class="gift-sub" id="giftsSub">open both, in any order</p>
+    <div class="blush-grid">
+
+      <button class="blush-card" data-go="s-letter" data-key="letter">
+        <span class="blush-photo">
+          <svg viewBox="0 0 140 140" aria-hidden="true">
+            <rect width="140" height="140" fill="#F3E6DC"/>
+            <rect x="20" y="46" width="100" height="62" rx="3" fill="#FBF4E9" stroke="#E4D2BE" stroke-width="1.5" transform="rotate(-4 70 77)"/>
+            <path d="M28 50l42 34 42-34" fill="none" stroke="#C9AE86" stroke-width="1.5" transform="rotate(-4 70 77)"/>
+            <path d="M96 62c6-2 14 3 12 10-6 4-16-2-12-10z" fill="#FFFFFF" stroke="#DCC9A6" stroke-width="1"/>
+            <path d="M96 62c3 6 2 12-2 16" stroke="#8FAE8A" stroke-width="1.2" fill="none"/>
+            <circle cx="100" cy="58" r="1.6" fill="#FFFFFF"/><circle cx="106" cy="63" r="1.4" fill="#FFFFFF"/><circle cx="102" cy="68" r="1.4" fill="#FFFFFF"/>
+            <path d="M60 84c-3-4-1-9 4-9s6 5 4 9c-2 3-6 3-8 0z" fill="#C98A93"/>
+          </svg>
+        </span>
+        <div class="b-title">a letter</div>
+        <div class="b-caption" data-tick="letter">some words, just for you</div>
+        <span class="b-arrow">→</span>
+      </button>
+
+      <button class="blush-card" data-go="s-photos" data-key="photos">
+        <span class="blush-photo">
+          <svg viewBox="0 0 140 140" aria-hidden="true">
+            <rect width="140" height="140" fill="#EDE9F2"/>
+            <g fill="none" stroke="#4A3F55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M46 58c-9 0-16 8-16 18 0 14 12 22 24 30 12-8 24-16 24-30 0-10-7-18-16-18-4 0-7 2-8 5-1-3-4-5-8-5z" opacity="0"/>
+              <circle cx="52" cy="60" r="17"/>
+              <circle cx="88" cy="60" r="17"/>
+              <path d="M45 55c2-2 5-2 6 0M58 55c-2-2-5-2-6 0" opacity=".9"/>
+              <path d="M81 55c2-2 5-2 6 0M94 55c-2-2-5-2-6 0" opacity=".9"/>
+            </g>
+            <path d="M70 66c-6-6-16-4-16 3 0 6 8 10 16 16 8-6 16-10 16-16 0-7-10-9-16-3z" fill="#E8879A"/>
+          </svg>
+        </span>
+        <div class="b-title">moments</div>
+        <div class="b-caption" data-tick="photos">memories that feel like home</div>
+        <span class="b-arrow">→</span>
+      </button>
+
+    </div>
+    <div class="row"><button class="btn" id="toEnd" hidden>i'm done opening</button></div>
+  </section>
+
+  <!-- 6. LETTER -->
+  <section class="screen" id="s-letter">
+    <div class="poster">
+      <svg class="bow tl" aria-hidden="true" viewBox="0 0 90 80">
+        <path d="M45 40C30 18 4 20 4 34c0 12 20 12 41 6z" fill="#5A2230"/>
+        <path d="M45 40C60 18 86 20 86 34c0 12-20 12-41 6z" fill="#742B3B"/>
+        <path d="M45 40c-4 14-10 24-6 34 2 5 9 5 11 0 4-10-1-20-5-34z" fill="#5A2230"/>
+        <circle cx="45" cy="40" r="7" fill="#3B1420"/>
+      </svg>
+      <div class="poster-head">
+        <span class="eyebrow">happy</span>
+        <span class="script">birthday!</span>
+      </div>
+      <div class="poster-photo" id="letterPhoto"></div>
+      <div class="poster-body">
+        <div id="letterBody"></div>
+        <p class="sign" id="signOff"></p>
+      </div>
+      <svg class="bow br" aria-hidden="true" viewBox="0 0 90 80">
+        <path d="M45 40C30 18 4 20 4 34c0 12 20 12 41 6z" fill="#5A2230"/>
+        <path d="M45 40C60 18 86 20 86 34c0 12-20 12-41 6z" fill="#742B3B"/>
+        <path d="M45 40c-4 14-10 24-6 34 2 5 9 5 11 0 4-10-1-20-5-34z" fill="#5A2230"/>
+        <circle cx="45" cy="40" r="7" fill="#3B1420"/>
+      </svg>
+    </div>
+    <div class="row"><button class="btn ghost" data-go="s-gifts">back to the gifts</button></div>
+  </section>
+
+  <!-- 7. MOMENTS -->
+  <section class="screen" id="s-photos">
+    <h2 class="title">Moments</h2>
+    <p class="sub">memories that feel like home</p>
+    <div class="frames" id="frames"></div>
+    <div class="row"><button class="btn ghost" data-go="s-gifts">back to the gifts</button></div>
+  </section>
+
+  <!-- end -->
+  <section class="screen" id="s-end">
+    <h1 class="script" style="font-size:clamp(2.4rem,11vw,4.6rem)">Happy Birthday,</h1>
+    <h1 class="script" id="endName" style="font-size:clamp(2.8rem,14vw,5.6rem)"></h1>
+    <p class="sub" style="margin-top:18px">here's to another year of you</p>
+    <div class="row"><button class="btn ghost" data-go="s-gifts">open them again</button></div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
