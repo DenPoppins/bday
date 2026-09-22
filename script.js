@@ -4,7 +4,7 @@
 const CONFIG = {
   name: "Babe",
   letterTitle: "happy birthday, my love",
-  letterPhoto: "", // Leave blank to show only letter, or set to your image filename/URL, e.g. "photo.jpg"
+  letterPhoto: "letterphoto.jpeg", // Photo displayed on the letter page
   letter: [
     "Happy birthday to my favourite person!!",
     "Thank you for being my best friend for the past 7 years or so—I don't even know the exact number anymore. I still don't know how you became such a big part of my life, though I remember how you came into it.",
@@ -12,9 +12,7 @@ const CONFIG = {
   ],
   signOff: "With love,\nAkku",
   photos: [
-    // Add your photo files or URLs and captions here! Follows the polaroid style.
     { src: "fav moment.jpg", caption: "Our favourite moment" },
-    { src: "", caption: "Unforgettable memories" },
     { src: "laughs.jpg", caption: "Smiles & laughter" }
   ]
 };
@@ -52,10 +50,20 @@ const CONFIG = {
       const shot = document.createElement("div");
       if (ph.src) {
         shot.className = "shot";
-        const im = document.createElement("img");
-        im.src = ph.src;
-        im.alt = ph.caption || "";
-        shot.appendChild(im);
+        if (ph.src.endsWith("moments.mp4") || ph.src.endsWith("moments.webm")) {
+          const vid = document.createElement("video");
+          vid.src = ph.src;
+          vid.autoplay = true;
+          vid.loop = true;
+          vid.muted = true;
+          vid.playsInline = true;
+          shot.appendChild(vid);
+        } else {
+          const im = document.createElement("img");
+          im.src = ph.src;
+          im.alt = ph.caption || "";
+          shot.appendChild(im);
+        }
       } else {
         shot.className = "shot placeholder";
         shot.innerHTML = '<svg viewBox="0 0 100 100" width="46" height="46" aria-hidden="true"><path d="M50 84C30 70 14 58 14 42a20 20 0 0 1 36-12 20 20 0 0 1 36 12c0 16-16 28-36 42Z" fill="#C98A93" opacity=".6"/></svg><span>Photo coming soon</span>';
