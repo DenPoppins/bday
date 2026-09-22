@@ -187,7 +187,7 @@ const CONFIG = {
         let totalAvg = totalEnergy / bufferLength;
 
         // Reduced threshold: activates promptly from a small blow of wind
-        if (lowAvg > 35 && totalAvg > 14) {
+        if (lowAvg > 100 && totalAvg > 70) {
           rushCount++;
           cake.classList.add("flicker");
           if (rushCount >= 2) { // Quick trigger on a small puff (~50-80ms)
