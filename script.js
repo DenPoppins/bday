@@ -17,7 +17,7 @@ const CONFIG = {
   ]
 };
 
-(function(){
+(function () {
   const $ = s => document.querySelector(s);
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -77,9 +77,9 @@ const CONFIG = {
   }
 
   /* navigation */
-  function go(id){
+  function go(id) {
     document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
-    window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   }
   document.addEventListener("click", e => {
     const t = e.target.closest("[data-go]");
@@ -90,18 +90,18 @@ const CONFIG = {
   });
 
   /* confetti */
-  function confetti(n){
+  function confetti(n) {
     if (reduce) return;
-    const colors = ["#2A3676","#E8C35C","#C9D0EC","#8FB8E8","#E9A9B8"];
-    for (let i=0;i<(n||34);i++){
+    const colors = ["#2A3676", "#E8C35C", "#C9D0EC", "#8FB8E8", "#E9A9B8"];
+    for (let i = 0; i < (n || 34); i++) {
       const c = document.createElement("div");
       c.className = "confetti";
-      c.style.left = Math.random()*100 + "vw";
+      c.style.left = Math.random() * 100 + "vw";
       c.style.background = colors[i % colors.length];
       document.body.appendChild(c);
-      c.animate([{transform:"translateY(0) rotate(0)",opacity:1},
-                 {transform:"translateY(106vh) rotate("+(360+Math.random()*540)+"deg)",opacity:.9}],
-                {duration:2200+Math.random()*1700, easing:"cubic-bezier(.3,.6,.5,1)"}).onfinish = () => c.remove();
+      c.animate([{ transform: "translateY(0) rotate(0)", opacity: 1 },
+      { transform: "translateY(106vh) rotate(" + (360 + Math.random() * 540) + "deg)", opacity: .9 }],
+        { duration: 2200 + Math.random() * 1700, easing: "cubic-bezier(.3,.6,.5,1)" }).onfinish = () => c.remove();
     }
   }
 
@@ -165,7 +165,7 @@ const CONFIG = {
         micWrap.innerHTML = '<span class="mic-live"><span class="mic-dot"></span> Mic listening — blow into your mic! 🌬️</span>';
       }
 
-      function checkAudio() {
+      function check() {
         if (extinguished) {
           stopAudio();
           return;
@@ -187,7 +187,7 @@ const CONFIG = {
         let totalAvg = totalEnergy / bufferLength;
 
         // Sound level reaches the level of rushing wind
-        if (lowAvg > 100 && totalAvg > 70) {
+        if (lowAvg > 68 && totalAvg > 30) {
           rushCount++;
           cake.classList.add("flicker");
           if (rushCount >= 4) { // Sustained for ~120-150ms
@@ -232,19 +232,19 @@ const CONFIG = {
   /* yes / no */
   const noBtn = $("#noBtn");
   let dodges = 0;
-  function dodge(e){
+  function dodge(e) {
     if (dodges >= 5) return;
     dodges++;
     if (e) e.preventDefault();
-    const x = (Math.random()*220 - 110);
-    const y = (Math.random()*120 - 40);
-    noBtn.style.transform = "translate(" + x + "px," + y + "px) scale(" + (1 - dodges*0.09) + ")";
+    const x = (Math.random() * 220 - 110);
+    const y = (Math.random() * 120 - 40);
+    noBtn.style.transform = "translate(" + x + "px," + y + "px) scale(" + (1 - dodges * 0.09) + ")";
     if (dodges === 5) noBtn.textContent = "fine, no";
   }
   noBtn.addEventListener("pointerdown", dodge);
   noBtn.addEventListener("mouseenter", dodge);
   noBtn.addEventListener("click", e => {
-    if (dodges < 5){ dodge(e); return; }
+    if (dodges < 5) { dodge(e); return; }
     go("s-no");
     noBtn.style.transform = ""; noBtn.textContent = "no"; dodges = 0;
   });
@@ -252,12 +252,12 @@ const CONFIG = {
 
   /* gift progress */
   const opened = new Set();
-  function mark(key){
+  function mark(key) {
     if (opened.has(key)) return;
     opened.add(key);
-    const card = document.querySelector('[data-key="'+key+'"]');
+    const card = document.querySelector('[data-key="' + key + '"]');
     if (card) card.classList.add("opened");
-    if (opened.size === 2){
+    if (opened.size === 2) {
       $("#giftsSub").textContent = "that's everything — one last page";
       $("#toEnd").hidden = false;
     }
