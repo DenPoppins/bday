@@ -7,8 +7,8 @@ const CONFIG = {
   letterPhoto: "", // Photo displayed on the letter page
   letter: [
     "Happy birthday to my favourite person!!",
-    "Thank you for being my best friend for the past 7 years or so—I don't even know the exact number anymore. I still don't know how you became such a big part of my life, though I remember how you came into it. Eventhough we dont like her, i have to thank her",
-    "I hope this year brings you more joy, more strength, and every new beginning you've been praying for."
+    "Thank you for being my best friend for the past 7 years or so—I don't even know the exact number anymore. I still don't know how you became such a big part of my life, though I remember how you came into it. Eventhough we don't like her, i have to thank her",
+    "I hope this year brings you more joy, more strength, orumich pass akanum olla yogam ondagatte and every new beginning you've been praying for."
   ],
   signOff: "With love,\nAkku",
   photos: [
