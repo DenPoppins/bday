@@ -97,7 +97,7 @@ p:last-child{margin-bottom:0}
 .bunting{width:100%;max-width:620px;margin:0 auto 4px;display:block}
 
 /* cake */
-.cake{width:min(74vw,300px);margin:6px auto 0;display:block;background:none;border:0;padding:0;cursor:pointer}
+.cake{width:min(74vw,300px);margin:6px auto 0;display:block;background:none;border:0;padding:0;cursor:default;user-select:none;-webkit-user-select:none;pointer-events:none}
 .flame{transform-origin:50% 100%;animation:flick .9s ease-in-out infinite alternate}
 @keyframes flick{from{transform:scale(1) translateY(0)}to{transform:scale(1.12) translateY(-2px)}}
 .out .flame{display:none}

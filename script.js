@@ -4,7 +4,7 @@
 const CONFIG = {
   name: "Babe",
   letterTitle: "happy birthday, my love",
-  letterPhoto: "letterphoto.jpeg", // Photo displayed on the letter page
+  letterPhoto: "", // Photo displayed on the letter page
   letter: [
     "Happy birthday to my favourite person!!",
     "Thank you for being my best friend for the past 7 years or so—I don't even know the exact number anymore. I still don't know how you became such a big part of my life, though I remember how you came into it.",
@@ -12,7 +12,7 @@ const CONFIG = {
   ],
   signOff: "With love,\nAkku",
   photos: [
-    { src: "fav moment.jpg", caption: "Our favourite moment" },
+    { src: "fav moment.jpg", caption: "My fav Moment of you" },
     { src: "laughs.jpg", caption: "Smiles & laughter" }
   ]
 };
@@ -136,7 +136,7 @@ const CONFIG = {
     setTimeout(() => go("s-ask"), 1200);
   }
 
-  cake.addEventListener("click", extinguishCandle);
+  // Candle only blows out via microphone detection (touch/click removed)
   $("#toAsk").addEventListener("click", () => go("s-ask"));
 
   async function startBlowDetection() {
@@ -147,6 +147,9 @@ const CONFIG = {
       }
       audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") {
+        await audioCtx.resume();
+      }
       const analyser = audioCtx.createAnalyser();
       analyser.fftSize = 512;
       analyser.smoothingTimeConstant = 0.2;
@@ -206,16 +209,18 @@ const CONFIG = {
       console.log("Microphone access unavailable or denied:", err);
       const micWrap = $("#micPromptWrap");
       if (micWrap) {
-        micWrap.innerHTML = '<small style="opacity:0.75">(tap the candle to blow it out)</small>';
+        micWrap.innerHTML = '<button class="btn ghost small-btn" id="micEnableBtn" type="button">🎤 enable mic to blow</button>';
       }
     }
   }
 
-  const micBtn = $("#micEnableBtn");
-  if (micBtn) {
-    micBtn.addEventListener("click", e => {
-      e.stopPropagation();
-      startBlowDetection();
+  const micWrap = $("#micPromptWrap");
+  if (micWrap) {
+    micWrap.addEventListener("click", e => {
+      if (e.target.closest("#micEnableBtn")) {
+        e.stopPropagation();
+        startBlowDetection();
+      }
     });
   }
 

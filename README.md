@@ -29,7 +29,7 @@ A personalized, interactive, and beautifully styled birthday surprise web applic
 ## 🌟 Project Overview
 
 This project provides an engaging, multi-stage storytelling birthday experience that guides the user through sequential screens:
-1. **Cake Screen**: Make a wish and blow out the candle using their microphone (or tap).
+1. **Cake Screen**: Make a wish and blow out the candle using the microphone.
 2. **Accept Gift Prompt**: Playful interactive prompt with a dodging "no" button.
 3. **Flower Bouquet**: A blooming lotus bouquet presentation.
 4. **Choose Your Gifts**: Hub screen tracking opened gifts.
@@ -77,7 +77,7 @@ The application operates as a single-page state machine where only one `.screen`
 
 ```mermaid
 flowchart TD
-    A[1. Candle Screen (#s-cake)] -->|Blow / Tap Candle| B[2. Accept Prompt (#s-ask)]
+    A[1. Candle Screen (#s-cake)] -->|Blow Candle via Mic| B[2. Accept Prompt (#s-ask)]
     B -->|Click 'Yes'| D[4. Flower Bouquet (#s-bouquet)]
     B -->|Click 'No' after 5 dodges| C[3. 'Why did you click no!' (#s-no)]
     C -->|Click 'Try again'| B
@@ -113,13 +113,11 @@ Located in `script.js` inside `startBlowDetection()`:
 - **Frequency Analysis**: Connects the input stream to an `AnalyserNode` with `fftSize = 512`.
 - **Breath Sound Signature**:
   - Exhaling into a microphone creates high-energy turbulent noise concentrated in lower frequency bins (approx 60 Hz – 400 Hz, bins 1 to 6).
-  - The script checks if `lowAvg > 68` and `totalAvg > 30`.
+  - The script checks if `lowAvg > 100` and `totalAvg > 70`.
   - When sustained across ~4 animation frames (~120–150ms), the flame is extinguished:
     - Stops audio tracks to release microphone hardware.
     - Adds `.out` class to the cake SVG.
     - Launches celebratory confetti and automatically transitions to `#s-ask`.
-- **Graceful Fallback**:
-  - Clicking/tapping the cake directly calls `extinguishCandle()` if the user denies mic permissions or is on an unsupported device.
 
 ### 2. Playful Dodging Button Algorithm
 
@@ -284,5 +282,4 @@ Because this application consists entirely of static assets, it can be hosted fo
 
 - **Modern Browsers**: Tested on Chrome, Firefox, Safari, Edge, Android Chrome, and iOS Safari.
 - **Mobile Responsive**: Built with responsive SVG viewBoxes, fluid typography (`clamp()`), and media queries.
-- **Prefers-Reduced-Motion**: Animations (confetti, smooth scrolls, bouncing stickers) automatically respect OS accessibility settings.
-- **Fallback Interaction**: If microphone permission is declined or not supported, users can tap/click the candle to blow it out without getting stuck.
+- **Microphone Interaction**: Candle blow detection uses real-time Web Audio API frequency analysis to extinguish the flame purely via blowing into the microphone.
